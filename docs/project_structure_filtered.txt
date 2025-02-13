@@ -1,0 +1,102 @@
+--- Folder Structure ---
+.env
+.env.example
+.gitignore
+README.md
+[app]
+    ├── [(components)]
+        ├── [auth]
+            ├── LoginForm.tsx
+            ├── ProtectedRoute.tsx
+            └── RegisterForm.tsx
+        └── [dashboard]
+            ├── DashboardLayout.tsx
+            └── StatisticsCards.tsx
+    ├── [(dashboard)]
+        └── layout.tsx
+    ├── [(routes)]
+        ├── [(auth)]
+            ├── [login]
+                └── page.tsx
+            └── [register]
+                └── page.tsx
+        └── [(dashboard)]
+            └── [dashboard]
+                └── page.tsx
+    ├── [api]
+        ├── [auth]
+            ├── [login]
+                └── route.ts
+            └── [register]
+                └── route.ts
+        ├── [projects]
+            ├── [[id]]
+                └── route.ts
+            └── route.ts
+        ├── [tasks]
+            ├── [[id]]
+                └── route.ts
+            └── route.ts
+        └── [user]
+            └── route.ts
+    ├── [db]
+        ├── config.ts
+        └── schema.ts
+    ├── favicon.ico
+    ├── globals.css
+    ├── [hooks]
+        ├── useProjects.ts
+        ├── useTaskStats.ts
+        ├── useTasks.ts
+        └── useUsers.ts
+    ├── layout.tsx
+    ├── [lib]
+        ├── auth.ts
+        └── queryClient.ts
+    ├── page.tsx
+    └── [store]
+        ├── authStore.ts
+        ├── projectStore.ts
+        ├── taskStore.ts
+        └── types.ts
+bun.lockb
+[components]
+    └── [ui]
+        ├── alert.tsx
+        ├── button.tsx
+        ├── card.tsx
+        └── input.tsx
+components.json
+[docs]
+    └── .project_structure_filter
+[drizzle]
+    ├── 0000_marvelous_true_believers.sql
+    ├── 0001_flowery_triathlon.sql
+    ├── 0002_optimal_purifiers.sql
+    ├── 0003_dear_doctor_faustus.sql
+    └── [meta]
+        ├── 0000_snapshot.json
+        ├── 0001_snapshot.json
+        ├── 0002_snapshot.json
+        ├── 0003_snapshot.json
+        └── _journal.json
+drizzle.config.ts
+eslint.config.mjs
+[lib]
+    └── utils.ts
+middleware.ts
+next.config.ts
+package-lock.json
+package.json
+postcss.config.mjs
+[public]
+    ├── file.svg
+    ├── globe.svg
+    ├── next.svg
+    ├── vercel.svg
+    └── window.svg
+tailwind.config.ts
+todo.md
+tsconfig.json
+
+--- File Contents ---
