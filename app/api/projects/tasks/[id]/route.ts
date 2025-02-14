@@ -19,25 +19,19 @@ export async function GET(
     }
 
     // First verify the project belongs to the user
-    const project = await db.query.projects.findFirst({
-      where: and(
-        eq(projects.id, projectId),
-        eq(projects.userId, userId)
-      )
-    });
+    const project = await db.select()
+      .from(projects)
+      .where(and(eq(projects.id, projectId), eq(projects.userId, userId)))
 
     if (!project) {
       return new Response("Project not found", { status: 404 });
     }
+    if (project[0].userId !== userId) return new Response("Access Denied", { status: 401 })
 
     // Fetch all tasks for the project
-    const projectTasks = await db.query.tasks.findMany({
-      where: and(
-        eq(tasks.projectId, projectId),
-        eq(tasks.userId, userId)
-      ),
-      orderBy: [tasks.createdAt]
-    });
+    const projectTasks = await db.select()
+      .from(tasks)
+      .where(eq(tasks.projectId, projectId))
 
     return NextResponse.json(projectTasks);
   } catch (error) {
