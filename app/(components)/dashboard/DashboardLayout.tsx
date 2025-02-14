@@ -1,4 +1,5 @@
 // app/components/dashboard/DashboardLayout.tsx
+
 'use client'
 import { useState } from 'react';
 import Link from 'next/link';
@@ -51,7 +52,7 @@ export default function DashboardLayout({
         <div className="h-full flex flex-col">
           {/* Logo/Header */}
           <div className="px-4 py-6 border-b">
-            <h1 className="text-xl font-bold">Task Manager</h1>
+            <Link href={"/"}><h1 className="text-xl font-bold">Task Manager</h1></Link>
           </div>
 
           {/* Navigation */}
