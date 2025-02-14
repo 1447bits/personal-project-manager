@@ -1,6 +1,6 @@
 --- Folder Structure ---
 .env
-.env.example
+.env.local
 .gitignore
 README.md
 [app]
@@ -12,8 +12,6 @@ README.md
         └── [dashboard]
             ├── DashboardLayout.tsx
             └── StatisticsCards.tsx
-    ├── [(dashboard)]
-        └── layout.tsx
     ├── [(routes)]
         ├── [(auth)]
             ├── [login]
@@ -21,8 +19,17 @@ README.md
             └── [register]
                 └── page.tsx
         └── [(dashboard)]
-            └── [dashboard]
-                └── page.tsx
+            ├── [dashboard]
+                ├── [calendar]
+                    └── page.tsx
+                ├── page.tsx
+                ├── [projects]
+                    └── page.tsx
+                └── [tasks]
+                    └── page.tsx
+            └── layout.tsx
+    ├── [_admin]
+        └── route.tsx
     ├── [api]
         ├── [auth]
             ├── [login]
@@ -32,13 +39,18 @@ README.md
         ├── [projects]
             ├── [[id]]
                 └── route.ts
-            └── route.ts
-        ├── [tasks]
+            ├── route.ts
+            └── [tasks]
+                └── [[id]]
+                    └── route.ts
+        └── [tasks]
             ├── [[id]]
+                ├── route.ts
+                └── [update-date]
+                    └── route.ts
+            ├── route.ts
+            └── [stats]
                 └── route.ts
-            └── route.ts
-        └── [user]
-            └── route.ts
     ├── [db]
         ├── config.ts
         └── schema.ts
@@ -47,41 +59,40 @@ README.md
     ├── [hooks]
         ├── useProjects.ts
         ├── useTaskStats.ts
-        ├── useTasks.ts
-        └── useUsers.ts
+        └── useTasks.ts
     ├── layout.tsx
     ├── [lib]
         ├── auth.ts
         └── queryClient.ts
     ├── page.tsx
-    └── [store]
+    ├── [store]
         ├── authStore.ts
         ├── projectStore.ts
         ├── taskStore.ts
         └── types.ts
+    └── [utils]
+        └── cookie.ts
 bun.lockb
 [components]
     └── [ui]
         ├── alert.tsx
         ├── button.tsx
+        ├── calendar.tsx
         ├── card.tsx
-        └── input.tsx
+        ├── checkbox.tsx
+        ├── dialog.tsx
+        ├── input.tsx
+        ├── label.tsx
+        ├── select.tsx
+        ├── textarea.tsx
+        ├── toast.tsx
+        └── toaster.tsx
 components.json
-[docs]
-    └── .project_structure_filter
-[drizzle]
-    ├── 0000_marvelous_true_believers.sql
-    ├── 0001_flowery_triathlon.sql
-    ├── 0002_optimal_purifiers.sql
-    ├── 0003_dear_doctor_faustus.sql
-    └── [meta]
-        ├── 0000_snapshot.json
-        ├── 0001_snapshot.json
-        ├── 0002_snapshot.json
-        ├── 0003_snapshot.json
-        └── _journal.json
 drizzle.config.ts
+env.example
 eslint.config.mjs
+[hooks]
+    └── use-toast.ts
 [lib]
     └── utils.ts
 middleware.ts
