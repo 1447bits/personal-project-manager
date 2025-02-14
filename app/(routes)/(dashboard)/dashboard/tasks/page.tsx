@@ -23,7 +23,7 @@ const TasksPage = () => {
     const user = useAuthStore(state => state.user);
 
 
-    const { data: projects } = useProjects();
+    const { projects } = useProjects();
     const { data: tasks, isLoading, createTask, updateTask, deleteTask } = useTasks();
     const { toast } = useToast();
 

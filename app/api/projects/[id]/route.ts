@@ -6,12 +6,8 @@ import { projects } from '@/app/db/schema';
 import { and, eq } from 'drizzle-orm';
 import { getUserIdFromHeader } from '@/app/lib/auth';
 
-interface RouteParams {
-  params: {
-    id: string;
-  };
-}
-export async function PUT(request: NextRequest, { params }: RouteParams) {
+
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   try {
 
     const userId: number | null = await getUserIdFromHeader(request)
@@ -19,7 +15,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 
     const { id } = await params; // Remove await as params is not a promise
     const body = await request.json();
-    
+
     // Only pick the fields we want to update
     const { name, description } = body;
     const updateData = {
@@ -28,7 +24,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       userId,
       updatedAt: new Date(), // Add this if you have an updatedAt field
     };
-    
+
     const updatedProject = await db
       .update(projects)
       .set(updateData)
@@ -52,14 +48,14 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   }
 }
 
-export async function DELETE(_request: NextRequest, { params }: RouteParams) {
+export async function DELETE(_request: NextRequest, { params }: { params: { id: string } }) {
   try {
 
     const userId: number | null = await getUserIdFromHeader(_request)
     if (!userId) return new Response("Invalid Token", { status: 401 })
 
     const { id } = await params;
-    
+
     const deletedProject = await db
       .delete(projects)
       .where(and(eq(projects.id, parseInt(id)), eq(projects.userId, userId)))
