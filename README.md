@@ -45,6 +45,9 @@
 
 A modern, full-stack task management application built with Next.js 15, PostgreSQL, Drizzle ORM, and React Query. This application helps users organize their daily tasks and projects with a clean, intuitive interface.
 
+## Preview [site](https://personal-project-manager-one.vercel.app/)
+![project Prev](./public/PrevSS.png)
+
 ## 🚀 Features
 
 ### Core Functionality
