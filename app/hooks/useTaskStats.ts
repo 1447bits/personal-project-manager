@@ -17,7 +17,10 @@ interface TaskStats {
 }
 
 async function fetchTaskStats(): Promise<TaskStats> {
-  const response = await fetch('/api/tasks/stats');
+  const token = localStorage.getItem("token")
+  const response = await fetch('/api/tasks/stats', {
+    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+  });
   if (!response.ok) {
     throw new Error('Failed to fetch task statistics');
   }
