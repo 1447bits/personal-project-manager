@@ -23,15 +23,16 @@ export default function ProjectsPage() {
     const queryClient = useQueryClient();
 
     const userData = localStorage.getItem("user")
-    const token = localStorage.getItem("token")
     const userId = JSON.parse(userData ? userData : "{}").userId
 
     // Fetch projects using the custom hook
     const { data: projects, isLoading, error, createProject } = useProjects();
+    console.log(projects)
 
     // Update and delete mutations
     const updateProjectMutation = useMutation({
         mutationFn: async (project: Project) => {
+            const token = localStorage.getItem("token")
             const response = await fetch(`/api/projects/${project.id}`, {
                 method: 'PUT',
                 headers: {  'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
@@ -48,6 +49,7 @@ export default function ProjectsPage() {
 
     const deleteProjectMutation = useMutation({
         mutationFn: async (projectId: number) => {
+            const token = localStorage.getItem("token")
             const response = await fetch(`/api/projects/${projectId}`, {
                 method: 'DELETE',
                 headers: {  'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },

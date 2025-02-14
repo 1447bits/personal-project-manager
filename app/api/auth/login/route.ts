@@ -8,6 +8,7 @@ import { eq } from 'drizzle-orm';
 
 export async function POST(request: NextRequest) {
   try {
+    
     const { email, password } = await request.json();
 
     // Validate input

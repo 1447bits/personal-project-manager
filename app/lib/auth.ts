@@ -25,7 +25,9 @@ export async function createToken(payload: JWTPayload | undefined) {
 
 export async function verifyToken(token: string) {
   try {
-    const verified = await jwtVerify(token, JWT_SECRET);
+    const verified = await jwtVerify(token, JWT_SECRET).catch((err) => {
+      throw(err)
+    });
     return verified.payload;
   } catch (err) {
     console.log("error verifying jwt token", err)
@@ -39,4 +41,23 @@ export async function getTokenFromHeader(req: NextRequest) {
     return null;
   }
   return authHeader.split(' ')[1];
+}
+
+
+export async function getUserIdFromHeader(req: Request): Promise<null | number> {
+
+  const authHeader = req.headers.get('authorization');
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    console.log("No header")
+    return null;
+  }
+
+  const token = authHeader.split(' ')[1];
+  const payload = await verifyToken(token);
+
+  if (payload && typeof payload === 'object' && 'id' in payload) {
+    return payload.id as number; // Assuming the user ID is stored in the payload as 'userId'
+  }
+
+  return null;
 }
