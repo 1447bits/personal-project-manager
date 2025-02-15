@@ -31,16 +31,6 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const { title, description, priority, dueDate, projectId } = body;
 
-        console.log({
-            title,
-            description,
-            priority,
-            dueDate: dueDate ? new Date(dueDate) : null,
-            projectId,
-            userId,
-            completed: false,
-        })
-
         const newTask = await db.insert(tasks).values({
             title,
             description,

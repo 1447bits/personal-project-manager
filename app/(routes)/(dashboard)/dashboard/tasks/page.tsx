@@ -35,8 +35,8 @@ const TasksPage = () => {
         return tasks.filter(task => {
             const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 task.description?.toLowerCase().includes(searchTerm.toLowerCase());
-            const matchesPriority = !priorityFilter || task.priority === priorityFilter;
-            const matchesProject = !projectFilter || task?.projectId?.toString() === projectFilter;
+            const matchesPriority = !priorityFilter || priorityFilter == "_" || task.priority === priorityFilter;
+            const matchesProject = !projectFilter || projectFilter == "_" || task?.projectId?.toString() === projectFilter;
             const matchesCompletion = showCompleted ? true : !task.completed;
 
             return matchesSearch && matchesPriority && matchesProject && matchesCompletion;
@@ -212,7 +212,7 @@ const TasksPage = () => {
                                 <SelectValue placeholder="Filter by priority" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="all">All priorities</SelectItem>
+                                <SelectItem value="_">All priorities</SelectItem>
                                 <SelectItem value="low">Low</SelectItem>
                                 <SelectItem value="medium">Medium</SelectItem>
                                 <SelectItem value="high">High</SelectItem>
@@ -225,7 +225,7 @@ const TasksPage = () => {
                             <SelectContent>
                                 {projects?.length !== 0 &&
                                     <>
-                                        <SelectItem value={projects ? projects[0].id.toString() : "some"}>All projects</SelectItem>
+                                        <SelectItem value={projects ? projects[0].id.toString() : "_"}>All projects</SelectItem>
                                         {projects?.map(project => (
                                             <SelectItem key={project.id} value={project.id.toString()}>
                                                 {project.name}

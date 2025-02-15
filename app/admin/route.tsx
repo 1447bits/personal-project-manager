@@ -15,5 +15,4 @@ export async function GET(request: Request) {
 
     return Response.json({ projects: allProjects, users: allusers, tasks: alltasks })
 
-
 }

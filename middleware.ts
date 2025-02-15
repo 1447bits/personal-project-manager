@@ -4,6 +4,7 @@ import type { NextRequest } from 'next/server';
 import { verifyToken, getTokenFromHeader } from '@/app/lib/auth';
 
 export async function middleware(request: NextRequest) {
+  
   // Exclude auth routes from middleware
   if (request.nextUrl.pathname.startsWith('/api/auth')) {
     return NextResponse.next();

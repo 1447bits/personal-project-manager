@@ -211,9 +211,9 @@ const TaskCalendar = () => {
                                             onDragEnd={(e) => {
                                                 e.currentTarget.classList.remove('opacity-50');
                                             }}
-                                            className={`text-xs p-1 rounded cursor-move transition-all ${task.priority === 'high' ? 'bg-red-100 hover:bg-red-200' :
-                                                task.priority === 'medium' ? 'bg-yellow-100 hover:bg-yellow-200' :
-                                                    'bg-green-100 hover:bg-green-200'
+                                            className={`text-xs p-1 rounded cursor-move transition-all ${task.completed ? 'bg-green-100 hover:bg-green-200' : task.priority === 'high' ? 'bg-red-100 hover:bg-red-200' :
+                                                task.priority === 'medium' ? 'bg-orange-100 hover:bg-orange-200' :
+                                                    'bg-yellow-100 hover:bg-yellow-200'
                                                 }`}
                                         >
                                             {task.title}
