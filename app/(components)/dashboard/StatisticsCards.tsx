@@ -2,14 +2,27 @@
 'use client'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTaskStats } from '@/app/hooks/useTaskStats';
-import { 
-  CheckCircle2, 
-  Clock, 
+import {
+  CheckCircle2,
+  Clock,
   AlertTriangle,
-  BarChart2 
+  BarChart2
 } from 'lucide-react';
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function StatisticsCards() {
+
+  const queryClient = useQueryClient();
+  const pathname = usePathname();
+  
+  useEffect(() => {
+    // Refetch stats when this component mounts due to navigation
+    queryClient.invalidateQueries({ queryKey: ['taskStats'] });
+  }, [pathname, queryClient]);
+
+
   const { data: stats, isLoading } = useTaskStats();
 
   if (isLoading) {

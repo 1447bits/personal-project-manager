@@ -24,6 +24,7 @@ const TasksPage = () => {
 
 
     const { projects } = useProjects();
+    const noProjects = !projects || !projects.length || projects.length === 0
     const { data: tasks, isLoading, createTask, updateTask, deleteTask } = useTasks();
     const { toast } = useToast();
 
@@ -71,6 +72,10 @@ const TasksPage = () => {
                 updateTask({ taskId: selectedTask.id, updates: taskData });
                 toast({ title: "Task updated successfully" });
             } else {
+                if (!taskData.dueDate || !taskData.priority || !taskData.projectId || !taskData.title) {
+                    alert("Incomplete information!!")
+                    return;
+                }
                 await createTask(taskData);
                 toast({ title: "Task created successfully" });
             }
@@ -120,6 +125,8 @@ const TasksPage = () => {
             });
         }
     };
+
+    if (noProjects) return <p className='w-full h-[60vh] flex justify-center flex-col text-center text-gray-600 font-bold'>No Projects Yet!!<br />Please Create A Project First</p>
 
     return (
         <div className="container mx-auto p-6">

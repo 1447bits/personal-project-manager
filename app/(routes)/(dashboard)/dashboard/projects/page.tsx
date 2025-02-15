@@ -31,6 +31,7 @@ export default function ProjectsPage() {
 
     // Fetch projects using the custom hook
     const { projects, isLoadingProjects, createProject } = useProjects();
+    const noProjects = !projects || !projects.length || projects.length === 0
 
     // Fetch tasks for all projects
     const { data: tasks, createTask, updateTask, deleteTask } = useTasks();
@@ -155,6 +156,8 @@ export default function ProjectsPage() {
                     </DialogContent>
                 </Dialog>
             </div>
+
+            {noProjects && <p className='w-full text-gray-500 mt-56 text-center'>No Projects To SHow</p>}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {projects?.map((project) => (

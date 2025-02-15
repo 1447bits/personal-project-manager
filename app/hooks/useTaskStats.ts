@@ -31,5 +31,7 @@ export function useTaskStats() {
   return useQuery<TaskStats, Error>({
     queryKey: ['taskStats'],
     queryFn: fetchTaskStats,
+    refetchOnMount: true,    // Refetch when component mounts
+    staleTime: 0,           // Consider data stale immediately
   });
 }
