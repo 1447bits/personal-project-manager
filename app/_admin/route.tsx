@@ -3,7 +3,7 @@ import { db } from "../db/config";
 import { projects, tasks, users } from '@/app/db/schema';
 
 
-export async function GET(request: Request) {
+export async function GET() {
 
 
     const allProjects = await db.select().from(projects);
