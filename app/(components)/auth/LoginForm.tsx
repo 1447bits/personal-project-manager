@@ -16,31 +16,63 @@ export default function LoginForm() {
   const router = useRouter();
   const login = useAuthStore(state => state.login);
 
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setError('');
+  //   setIsLoading(true);
+
+  //   try {
+  //     const response = await fetch('/api/auth/login', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({ email, password }),
+  //     });
+
+  //     const data = await response.json();
+
+  //     if (!response.ok) {
+  //       throw new Error(data.error || 'Failed to login');
+  //     }
+
+  //     // save to localstorage
+  //     localStorage.setItem("user", JSON.stringify(data.user))
+  //     localStorage.setItem("token", data.token)
+
+  //     login(data.user, data.token);
+  //     router.push('/dashboard');
+
+  //   } catch (err) {
+  //     setError(err instanceof Error ? err.message : 'An error occurred');
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+  // app/components/auth/LoginForm.tsx
+
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-
     try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.error || 'Failed to login');
       }
+      // Just call login - persist middleware handles storage
+      login(data.user, data.token);
 
       // save to localstorage
       localStorage.setItem("user", JSON.stringify(data.user))
       localStorage.setItem("token", data.token)
-
-      login(data.user, data.token);
+      
       router.push('/dashboard');
-
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -60,7 +92,7 @@ export default function LoginForm() {
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
-          
+
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium">
               Email

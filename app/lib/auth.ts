@@ -56,7 +56,7 @@ export async function getUserIdFromHeader(req: Request): Promise<null | number> 
   const payload = await verifyToken(token);
 
   if (payload && typeof payload === 'object' && 'id' in payload) {
-    return payload.id as number; // Assuming the user ID is stored in the payload as 'userId'
+    return payload.id as number; 
   }
 
   return null;

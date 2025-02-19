@@ -1,9 +1,10 @@
 'use client'
 
 // app/components/auth/ProtectedRoute.tsx
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/app/store/authStore';
+import FullPageLoader from '../util/loader';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -11,16 +12,31 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const router = useRouter();
-  const { isAuthenticated, token } = useAuthStore();
+  const [isLoading, setIsLoading] = useState(true)
+
+  const { login } = useAuthStore();
 
   useEffect(() => {
-    if (!isAuthenticated || !token) {
+    // Check if there's stored auth data
+    const authData = localStorage.getItem('auth-storage');
+    if (authData) {
+      try {
+        const { state } = JSON.parse(authData);
+        if (state.token && state.user) {
+          login(state.user, state.token);
+          setIsLoading(false)
+        }
+      } catch (error) {
+        console.error('Failed to parse auth data:', error);
+      }
+    } else {
       router.push('/login');
     }
-  }, [isAuthenticated, token, router]);
+  }, [login, router]);
 
-  if (!isAuthenticated || !token) {
-    return null;
+
+  if (isLoading) {
+    return <FullPageLoader />
   }
 
   return <>{children}</>;

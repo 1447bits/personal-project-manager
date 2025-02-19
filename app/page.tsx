@@ -38,14 +38,27 @@ export default function Home() {
   return (
     <div className="min-h-screen">
 
-      <nav className="flex w-full items-end gap-4 p-2 flex-row-reverse">
-        <Link href={"/login"}><Button>Login</Button></Link>
-        <Link href={"/register"}><Button className="bg-transparent border-2 border-gray-600 text-black hover:bg-gray-200 hover:border-gray-400">Signup</Button></Link>
-      </nav>
+      <motion.section
+        className="mx-auto max-w-7xl text-center"
+        initial="initial"
+        animate="animate"
+        variants={fadeIn}
+      >
+
+        <motion.div
+          className="flex gap-4 justify-center"
+          variants={fadeIn}
+        >
+          <nav className="flex w-full items-end gap-4 p-2 flex-row-reverse">
+            <Link href={"/login"}><Button>Login</Button></Link>
+            <Link href={"/register"}><Button className="bg-transparent border-2 border-gray-600 text-black hover:bg-gray-200 hover:border-gray-400">Signup</Button></Link>
+          </nav>
+        </motion.div>
+      </motion.section>
 
       {/* Hero Section */}
       <motion.section
-        className="px-4 py-20 md:py-32 mx-auto max-w-7xl text-center"
+        className="px-4 md:py-32 mx-auto max-w-7xl text-center"
         initial="initial"
         animate="animate"
         variants={fadeIn}
@@ -69,7 +82,7 @@ export default function Home() {
           className="flex gap-4 justify-center"
           variants={fadeIn}
         >
-          <Link href="/dashboard">
+          <Link href="/login">
             <Button className="gap-2">
               Get Started
               <ArrowRight className="w-4 h-4" />
