@@ -6,14 +6,16 @@ import { getUserIdFromHeader } from "@/app/lib/auth";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+
+    const { id } = await params;
 
     const userId: number | null = await getUserIdFromHeader(request);
     if (!userId) return new Response("Invalid Token", { status: 401 });
 
-    const projectId = parseInt(params.id);
+    const projectId = parseInt(id);
     if (isNaN(projectId)) {
       return new Response("Invalid project ID", { status: 400 });
     }

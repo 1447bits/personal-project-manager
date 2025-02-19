@@ -7,8 +7,10 @@ import { getUserIdFromHeader } from '@/app/lib/auth';
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+
+  const { id } = await params;
 
   const userId: number | null = await getUserIdFromHeader(request)
   if (!userId) return new Response("Invalid Token", { status: 401 })
@@ -18,7 +20,7 @@ export async function PATCH(
   const updatedTask = await db
     .update(tasks)
     .set({ dueDate: new Date(dueDate) })
-    .where(and(eq(tasks.id, parseInt(params.id)), eq(tasks.userId, userId)))
+    .where(and(eq(tasks.id, parseInt(id)), eq(tasks.userId, userId)))
     .returning();
 
   return NextResponse.json(updatedTask[0]);

@@ -1,24 +1,18 @@
 // app/api/tasks/[id]/route.ts
-import { NextRequest } from 'next/server';
 import { db } from '@/app/db/config';
 import { tasks } from '@/app/db/schema';
 import { and, eq } from 'drizzle-orm';
 import { getUserIdFromHeader } from '@/app/lib/auth';
 
-interface RouteParams {
-  params: {
-    id: string;
-  };
-}
 
-export async function PUT(request: NextRequest, { params }: RouteParams) {
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
+
+    const { id } = await params;
 
     const userId: number | null = await getUserIdFromHeader(request)
     if (!userId) return new Response("Invalid Token", { status: 401 })
 
-
-    const { id } = await params;
     const body = await request.json();
 
     // Extract and format fields according to schema
@@ -56,7 +50,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   }
 }
 
-export async function DELETE(_request: NextRequest, { params }: RouteParams) {
+export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
 
   try {
 

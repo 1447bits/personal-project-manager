@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     const userId: number | null = await getUserIdFromHeader(request)
     if (!userId) return new Response("Invalid Token", { status: 401 })
 
-    const allProjects = await db.select().from(projects).where(eq(projects.userId, parseInt(userId)));
+    const allProjects = await db.select().from(projects).where(eq(projects.userId, userId));
     return Response.json(allProjects);
   } catch (error) {
     console.log(error)
