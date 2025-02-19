@@ -1,8 +1,11 @@
 // app/store/types.ts
 export interface User {
-    id: number;
+    password: StaticRange;
+    createdAt: Date;
+    id: number;    
     email: string;
     name: string;
+    
 }
 
 export interface Task {
