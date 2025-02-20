@@ -13,7 +13,7 @@ export default function Layout({
   children: React.ReactNode;
 }) {
   return <QueryClientProvider client={queryClient}>
-    <AuthInitializer />
+    <AuthInitializer doRedirect={true} />
     <ProtectedRoute>
       <DashboardLayout>
         {children}
