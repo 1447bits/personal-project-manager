@@ -4,9 +4,9 @@ import { useEffect } from 'react';
 import { useAuthStore } from '@/app/store/authStore';
 import { redirect } from 'next/navigation';
 
-export default function AuthInitializer() {
+export default function AuthInitializer({ doRedirect }: { doRedirect: boolean }) {
   const { login } = useAuthStore();
-  
+
   useEffect(() => {
     // Check if there's stored auth data
     const authData = localStorage.getItem('auth-storage');
@@ -20,9 +20,9 @@ export default function AuthInitializer() {
         console.error('Failed to parse auth data:', error);
       }
     } else {
-      redirect("/login")
+      if (doRedirect) redirect("/login")
     }
-  }, [login]);
+  }, [login, doRedirect]);
 
   return null;
 }

@@ -71,7 +71,7 @@ export default function LoginForm() {
       // save to localstorage
       localStorage.setItem("user", JSON.stringify(data.user))
       localStorage.setItem("token", data.token)
-      
+
       router.push('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -129,6 +129,13 @@ export default function LoginForm() {
             {isLoading ? 'Logging in...' : 'Login'}
           </Button>
         </form>
+
+        <div className='mt-10 opacity-60'>
+          <p>Just want to try app? Use test account</p>
+          <p>Email : b@b.b</p>
+          <p>Password : 1234</p>
+        </div>
+
       </CardContent>
     </Card>
   );
